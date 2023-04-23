@@ -11,6 +11,9 @@ import secrets,os
 #     {'title':'Why you loser','author':'Nayim','content':'second post first post contentfirst post contentcontent','date_posted':'March 2'}
 # ]
 
+# ========================================================
+# =====================HOME ROUTES========================
+# ========================================================
 @app.route("/")
 @app.route("/home")#this is second route to go home page 
 def home():
@@ -20,11 +23,17 @@ def home():
     return render_template('home.html', posts = posts, title = 'Home') #sending arguments
  
 
+# ========================================================
+# ====================ABOUT ROUTES========================
+# ========================================================
 @app.route("/about")
 def about():
     return render_template('about.html',title = 'About')
 
 
+# ========================================================
+# =================REGISTER ROUTES========================
+# ========================================================
 @app.route("/register",methods=['GET','POST'])
 def register():
     if current_user.is_authenticated:
@@ -40,6 +49,9 @@ def register():
     return render_template('register.html',title = 'Register', form = form)
 
 
+# ========================================================
+# =====================LOGIN ROUTES=======================
+# ========================================================
 @app.route("/login",methods=['GET','POST'])
 def login():
     if current_user.is_authenticated:
@@ -57,12 +69,18 @@ def login():
 
 
 
-
+# ========================================================
+# =====================LOGOUT ROUTES======================
+# ========================================================
 @app.route("/logout")
 def logout():
     logout_user()
     return redirect(url_for('home'))
 
+
+# ========================================================
+# =====================REDUCE PICTURE QUALITY=============
+# ========================================================
 def save_picture(form_picture):
     random_hex = secrets.token_hex(8)
     _, f_ext = os.path.splitext(form_picture.filename)
@@ -77,6 +95,9 @@ def save_picture(form_picture):
     return picture_fn
 
 
+# ========================================================
+# =====================ACCOUNT ROUTES=====================
+# ========================================================
 @app.route("/account",methods=['GET','POST'])
 @login_required
 def account():
@@ -98,7 +119,9 @@ def account():
             
 
 
-
+# ========================================================
+# =====================NEW POST ROUTES====================
+# ========================================================
 @app.route("/post/new",methods=['GET','POST'])
 @login_required
 def new_post():
@@ -112,13 +135,18 @@ def new_post():
     return render_template('create_post.html',title = 'New Post',form=form, legend='New Post')
 
    
-
+# ========================================================
+# =====================POST <> ROUTES=====================
+# ========================================================
 @app.route("/post/<int:post_id>")
 def post(post_id):
     post = Post.query.get_or_404(post_id)#get post by id but if it is not possible return 404
     return render_template('post.html',title=post.title, post=post)
 
 
+# ========================================================
+# ====================UPDATE POSTS ROUTES=================
+# ========================================================
 @app.route("/post/<int:post_id>/update",methods=['GET','POST'])
 @login_required
 def update_post(post_id):
@@ -138,6 +166,9 @@ def update_post(post_id):
     return render_template('create_post.html',title = 'Update Post',form=form, legend='Update Post')
 
 
+# ========================================================
+# ===================DELETE POST ROUTES===================
+# ========================================================
 @app.route("/post/<int:post_id>/delete",methods=['POST'])
 @login_required
 def delete_post(post_id):
@@ -150,7 +181,9 @@ def delete_post(post_id):
     return redirect(url_for('home'))
 
 
-
+# ========================================================
+# ===================USER POST ROUTES=====================
+# ========================================================
 @app.route("/user/<string:username>")#this is second route to go home page 
 def user_posts(username):
     # posts = Post.query.all()
