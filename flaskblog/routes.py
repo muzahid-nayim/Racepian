@@ -15,7 +15,7 @@ import secrets,os
 # =====================HOME ROUTES========================
 # ========================================================
 @app.route("/")
-@app.route("/home")#this is second route to go home page 
+# @app.route("/home")#this is second route to go home page 
 def home():
     # posts = Post.query.all()
     page = request.args.get('page',1, type=int)
@@ -29,6 +29,16 @@ def home():
 @app.route("/about")
 def about():
     return render_template('about.html',title = 'About')
+
+
+# ========================================================
+# ====================BLOG ROUTES========================
+# ========================================================
+@app.route("/blog")
+def blog():
+    page = request.args.get('page',1, type=int)
+    posts = Post.query.order_by(Post.date_posted.desc()).paginate(page=page, per_page=5)
+    return render_template('blog.html',title ='Blog',posts=posts)
 
 
 # ========================================================
@@ -131,7 +141,7 @@ def new_post():
         db.session.add(post)
         db.session.commit()
         flash('Your post has been created!','success')
-        return redirect(url_for('home'))
+        return redirect(url_for('blog'))
     return render_template('create_post.html',title = 'New Post',form=form, legend='New Post')
 
    
@@ -178,7 +188,7 @@ def delete_post(post_id):
     db.session.delete(post)
     db.session.commit()
     flash('Your post has been deleted !','success')
-    return redirect(url_for('home'))
+    return redirect(url_for('blog'))
 
 
 # ========================================================
