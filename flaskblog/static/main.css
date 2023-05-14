@@ -1,13 +1,15 @@
 
 /* ================================== */
 
-  @import url('https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&display=swap');
-
+  @import url('https://fonts.googleapis.com/css2?family=Geostar&family=Gloria+Hallelujah&display=swap');
 :root {
     --bg-color: white;
     --btn-color: #46A094;
-    --text-color: #064674;
-    --card-color: #AECFA4;
+    --text-color: #06748a;
+    --link-color: #2a3d25;
+    --head-color: #3dc99f;
+    --header-color: #049469;
+    --footer-color: #063626;
   }
  
   .logo{
@@ -20,16 +22,123 @@
     color: var(--text-color);
   }
   .navbar-bg{
-    background-color: var(--card-color)
+    background-color: var(--head-color)
   }
   .text-color{
     color: var(--text-color)
   }
 .btn-color{
-    color: var(--btn-color);
+    background-color: var(--btn-color);
+    color: white;
 }
 
 /* ========================================= */
 main{
   margin-top: 100px;
+}
+a{
+  text-decoration: none;
+}
+
+.header-color{
+  color: var(--header-color);
+}
+.author-name{
+  color: var(--link-color);
+}
+
+
+.bdr{
+  border: solid red ;
+}
+.left-side{
+  background: linear-gradient(to bottom ,#5ecfaf,#52B78E);
+}
+.right-side{
+  background-color: rgb(238, 238, 238);
+}
+
+
+
+.animated-hr {
+  border: none;
+  height: 108px;
+  width: 40%;
+  background-color: #5DCDAC;
+  position: relative;
+  animation-name: float;
+  animation-duration: 2s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+  margin: 0 auto;
+  border: solid #5DCDAC;
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+.pro-border{
+  border: solid var(--header-color) 4px;
+}
+
+.profile-pic-container {
+  position: relative;
+  display: inline-block;
+  border-radius: 50%;
+  overflow: hidden;
+  animation: pulse-border 2s ease-in-out infinite;
+}
+
+.profile-pic-container img {
+  display: block;
+  width: 100px;
+  height: 100px;
+}
+
+@keyframes pulse-border {
+  0% {
+    box-shadow: 0 0 0 0 var(--header-color);
+  }
+  100% {
+    box-shadow: 0 0 0 20px rgba(0, 255, 0, 0);
+  }
+}
+.user-post-container{
+  background-color: rgba(0, 225, 255, 0.089);
+  border-radius: 5px;
+}
+
+.total-post{
+  font-family: 'Geostar', cursive;
+}
+.section-border{
+  border-radius: 8px;
+  background: #d0f7ef62;
+  box-shadow:  5px 5px 10px #a1a1a1,
+               -5px -5px 10px #ffffff;
+}
+
+
+footer{
+  background-color: var(--footer-color);
+}
+li,ul{
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  line-height: 1cm;
+}
+
+a{
+  color: black;
 }

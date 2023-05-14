@@ -19,7 +19,7 @@ import secrets,os
 def home():
     # posts = Post.query.all()
     page = request.args.get('page',1, type=int)
-    posts = Post.query.order_by(Post.date_posted.desc()).paginate(page=page, per_page=5)
+    posts = Post.query.order_by(Post.date_posted.desc()).paginate(page=page, per_page=6)
     return render_template('home.html', posts = posts, title = 'Home') #sending arguments
  
 
@@ -37,9 +37,14 @@ def about():
 @app.route("/blog")
 def blog():
     page = request.args.get('page',1, type=int)
-    posts = Post.query.order_by(Post.date_posted.desc()).paginate(page=page, per_page=5)
+    posts = Post.query.order_by(Post.date_posted.desc()).paginate(page=page, per_page=6)
     return render_template('blog.html',title ='Blog',posts=posts)
 
+@app.route("/test")
+def test():
+    page = request.args.get('page',1, type=int)
+    posts = Post.query.order_by(Post.date_posted.desc()).paginate(page=page, per_page=5)
+    return render_template('test.html',title ='Test',posts=posts)
 
 # ========================================================
 # =================REGISTER ROUTES========================
@@ -108,7 +113,7 @@ def save_picture(form_picture):
 # ========================================================
 # =====================ACCOUNT ROUTES=====================
 # ========================================================
-@app.route("/account",methods=['GET','POST'])
+@app.route("/user_account",methods=['GET','POST'])
 @login_required
 def account():
      form = UpdateAccountForm()
@@ -124,8 +129,9 @@ def account():
      elif request.method == 'GET':
          form.username.data = current_user.username
          form.email.data = current_user.email
+         
      image_file = url_for('static', filename='profilePic/' + current_user.image_file)
-     return render_template('account.html',title = 'Account', image_file=image_file, form=form)
+     return render_template('account.html',title = 'Account', form=form,image_file=image_file)
             
 
 
@@ -142,7 +148,8 @@ def new_post():
         db.session.commit()
         flash('Your post has been created!','success')
         return redirect(url_for('blog'))
-    return render_template('create_post.html',title = 'New Post',form=form, legend='New Post')
+    image_file = url_for('static', filename='profilePic/' + current_user.image_file)
+    return render_template('create_post.html',title = 'New Post',form=form, legend='New Post', image_file=image_file,sider="let's create  a new post ")
 
    
 # ========================================================
@@ -173,7 +180,8 @@ def update_post(post_id):
     else :
         form.title.data = post.title
         form.content.data = post.content
-    return render_template('create_post.html',title = 'Update Post',form=form, legend='Update Post')
+    image_file = url_for('static', filename='profilePic/' + current_user.image_file)
+    return render_template('create_post.html',title = 'Update Post',form=form, legend='Update Post' , sider="Let's update the post",image_file=image_file)
 
 
 # ========================================================

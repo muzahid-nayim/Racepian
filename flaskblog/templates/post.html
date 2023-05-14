@@ -2,22 +2,26 @@
 {% block content%}
         <article class="media content-section">
             <img class="rounded-circle article-img" src="{{url_for('static', filename='profilePic/' + post.author.image_file)}}" alt="">
-            <div class="media-body">
+            <div class="media-body my-1">
                 <div class="article-metadata">
                     <a class="me-2" href="{{url_for('user_posts', username=post.author.username)}}">{{post.author.username}}</a>
                     <small class="text-muted">{{post.date_posted.strftime('%Y-%m-%d')}}</small>
                     {%if post.author == current_user %}
                     <div>
-                        <a class="btn btn-secondary btn-sm m-1" href="{{url_for('update_post', post_id=post.id)}}">Update</a>
+                        <a class="btn btn-color btn-sm m-1" href="{{url_for('update_post', post_id=post.id)}}">Update</a>
                         <button type="button" class="btn btn-danger btn-sm m-1 " data-bs-toggle="modal" data-bs-target="#deleteModal">Delete</button>
                     </div>
                     {% endif %}
                 </div>
-                <h2 class="article-title">{{post.title}}</h2>
-                <p>{{post.content}}</p>
+                <div class="article-content py-3">
+                    <h2 class="article-title">{{post.title}}</h2>
+                    <img src="https://img.freepik.com/free-photo/chicken-wings-barbecue-sweetly-sour-sauce-picnic-summer-menu-tasty-food-top-view-flat-lay_2829-6471.jpg" class="card-img-top" alt="...">
+                    <p class="py-4">{{post.content|safe}}</p>
+                </div>
+                
             </div>
         </article>
-        <!-- Modal -->
+        <!-- Modal to make sure delete the post  -->
             <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                 <div class="modal-content">

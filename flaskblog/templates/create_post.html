@@ -1,46 +1,77 @@
 {% extends "layout.html" %}
 {% block content%}
+<!-- {{ ckeditor.load() }} -->
 <div class="content-section">
-    <form action="" method="POST">
-        {{ form.hidden_tag() }}
-        <fieldset class="form-group">
-            <legend class="border-bottom mb-4">{{legend}} </legend>
+
+
+    <div class="row p-2">
+        <div class="col-lg-4 d-flex justify-content-center align-items-center  border text-white left-side">
+            <div class="left-content text-center p-3">
+                <h1 class="">Welcome back</h1>
+                <h5>{{sider}}</h5>
+            </div>
+        </div>
+        <div class="col-lg-8 border right-side ">
+            <div class="media d-block justify-content-center align-items-center py-3">
+                <div class="pro-image  d-flex justify-content-center  align-items-center p-2">
+                    <div class="profile-pic-container  ">
+                        <img class=" account-img   text-center" height="100px" width="100px"   src="{{image_file}}" alt="">
+                    </div>
+                </div>
+                <div class="media-body text-center">
+                    <h2 class="account-hedding ">{{current_user.username}}</h2>
+                    <p class="text-secondary">{{current_user.email}}</p>
+                </div>
+                   
+                <hr class="animated-hr">
+                
+                <form action="" method="POST">
+                    {{ form.hidden_tag() }}
+                    <fieldset class="form-group">
+                        <legend class="border-bottom mb-4">{{legend}} </legend>
+                        
+                        <!-- ========EMAIL ========= -->
+                        <div class="form-group">
+                            {{form.title.label(class="form-control-label")}}
             
-            <!-- ========EMAIL ========= -->
-            <div class="form-group">
-                {{form.title.label(class="form-control-label")}}
-
-                {%if form.title.errors %}
-                {{form.title(class="form-control form-control-lg is-invalid")}}
-                <div class="invalid-feedback">
-                    {%for error in form.title.errors %}
-                    <span>{{ error }}</span>
-                    {%endfor%}
-                </div>
-                {%else%}
-                    {{form.title(class="form-control form-control-lg")}}
-                {%endif%}
-               </div>
-            <!-- ========PASSWORD ========= -->
-            <div class="form-group">
-                {{form.content.label(class="form-control-label")}}
-
-                {%if form.content.errors %}
-                {{form.content(class="form-control form-control-lg is-invalid")}}
-                <div class="invalid-feedback">
-                    {%for error in form.content.errors %}
-                    <span>{{ error }}</span>
-                    {%endfor%}
-                </div>
-                {%else%}
-                    {{form.content(class="form-control form-control-lg")}}
-                {%endif%}
-               </div>
-            <!-- ======== SUBMIT ========= -->
-               <div class="form-group  my-2">
-                {{form.submit(class="btn btn-outline-info")}}
-               </div>
-        </fieldset>
-    </form>
+                            {%if form.title.errors %}
+                            {{form.title(class="form-control form-control-lg is-invalid")}}
+                            <div class="invalid-feedback">
+                                {%for error in form.title.errors %}
+                                <span>{{ error }}</span>
+                                {%endfor%}
+                            </div>
+                            {%else%}
+                                {{form.title(class="form-control form-control-lg")}}
+                            {%endif%}
+                           </div>
+                        <!-- ========PASSWORD ========= -->
+                        <div class="form-group">
+                            {{form.content.label(class="form-control-label")}}
+            
+                            {%if form.content.errors %}
+                            {{form.content(class="form-control form-control-lg is-invalid")}}
+                            <div class="invalid-feedback">
+                                {%for error in form.content.errors %}
+                                <span>{{ error }}</span>
+                                {%endfor%}
+                            </div>
+                            {%else%}
+                                {{form.content(class="form-control form-control-lg")}}
+                            {%endif%}
+                           </div>
+                        <!-- ======== SUBMIT ========= -->
+                           <div class="form-group  my-2">
+                            {{form.submit(class="btn btn-outline-info")}}
+                           </div>
+                    </fieldset>
+                </form>
+                {{ ckeditor.load() }}
+                {{ ckeditor.config(name='content') }}
+            </div> 
+        </div>
+    </div>
+<!-- ================================================================================= -->
+    
    </div>
 {% endblock content%}
