@@ -6,6 +6,8 @@ from wtforms.validators import DataRequired,Length,Email,EqualTo,ValidationError
 from flaskblog.models import User
 from flask_ckeditor import CKEditorField
 
+
+
 # ========================================
 # ==========RegistrationForm==============
 # ========================================
@@ -62,13 +64,3 @@ class UpdateAccountForm(FlaskForm):
             user = User.query.filter_by(email=email.data).first()
             if user:
                 raise ValidationError('that email is already taken try another one')
-
-# ========================================
-# ==========Post Form==============
-# ========================================
-
-class PostForm(FlaskForm):
-    title = StringField('title',validators=[DataRequired()])
-    # content = TextAreaField('Content',validators=[DataRequired()])
-    content = CKEditorField('Content',validators=[DataRequired()])
-    submit = SubmitField('Post')

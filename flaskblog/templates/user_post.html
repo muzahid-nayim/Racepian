@@ -4,7 +4,7 @@
     <div class="row user-post-container p-2 g-4 my-3 ">
         {% for post in posts.items %}
         <div class=" col-md-6 col-lg-4 ">
-            <a class="article-title" href="{{url_for('post', post_id=post.id)}}">
+            <a class="article-title" href="{{url_for('posts.post', post_id=post.id)}}">
                 <div class="card mb-3 h-100  post-card">
                     <img src="https://img.freepik.com/free-photo/chicken-wings-barbecue-sweetly-sour-sauce-picnic-summer-menu-tasty-food-top-view-flat-lay_2829-6471.jpg" class="card-img-top" alt="...">
                     <div class="card-body">
@@ -17,7 +17,7 @@
                                 <img class="rounded-circle article-img" src="{{url_for('static', filename='profilePic/' + post.author.image_file)}}" width="40px"  height="40px" alt="">
                             </div>
                             <div class="info p-1" >
-                                <a class="me-2 author-name" href="{{url_for('user_posts', username=post.author.username)}}">{{post.author.username}}</a>
+                                <a class="me-2 author-name" href="{{url_for('users.user_posts', username=post.author.username)}}">{{post.author.username}}</a>
                                 <p class="card-text"><small class="text-muted">{{post.date_posted.strftime('%Y-%m-%d')}}</small></p>
                             </div>
                         </div>
@@ -31,9 +31,9 @@
     {% for page_num in posts.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
         {% if page_num %}
             {% if posts.page == page_num %}
-                <a class="btn btn-info mb-4" href="{{url_for('user_posts',page=page_num, username=user.username)}}">{{page_num}}</a>
+                <a class="btn btn-info mb-4" href="{{url_for('users.user_posts',page=page_num, username=user.username)}}">{{page_num}}</a>
             {% else %}
-                <a class="btn btn-outline-info mb-4" href="{{url_for('user_posts',page=page_num, username=user.username)}}">{{page_num}}</a>
+                <a class="btn btn-outline-info mb-4" href="{{url_for('users.user_posts',page=page_num, username=user.username)}}">{{page_num}}</a>
             {% endif %}
         {% else %}
         ...
